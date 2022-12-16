@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_16_025928) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_16_032826) do
   create_table "authors", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -24,6 +24,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_025928) do
     t.index ["middle_name"], name: "index_authors_on_middle_name"
   end
 
+  create_table "books", force: :cascade do |t|
+    t.integer "publisher_id", null: false
+    t.string "isbn13", null: false
+    t.string "title", null: false
+    t.decimal "list_price", precision: 10, scale: 2, null: false
+    t.integer "publication_year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "upper(replace(isbn13,'-',''))", name: "normalized_isbn13_uniq_idx", unique: true
+    t.index ["publisher_id"], name: "index_books_on_publisher_id"
+    t.index ["title"], name: "index_books_on_title"
+    t.check_constraint "length(isbn13) >= 13", name: "isbn13_length_check"
+  end
+
   create_table "publishers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -31,4 +45,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_025928) do
     t.index "lower(name)", name: "index_publishers_on_lower_name", unique: true
   end
 
+  add_foreign_key "books", "publishers"
 end

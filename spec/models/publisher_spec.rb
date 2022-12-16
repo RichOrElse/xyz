@@ -9,6 +9,7 @@ RSpec.describe Publisher, type: :model do
   end
 
   context 'database' do
+    it { is_expected.to have_many :books }
     it { is_expected.to have_db_column(:name).with_options(null: false) }
     it { is_expected.to have_db_index('lower(name)').unique }
   end
