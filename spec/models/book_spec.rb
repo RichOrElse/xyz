@@ -4,6 +4,8 @@ RSpec.describe Book, type: :model do
   include_context "with book params"
   subject { Book.new(book_params) }
 
+  it { is_expected.to have_attributes(publisher_name: publisher.name) }
+
   context 'validations' do
     it { is_expected.to validate_presence_of(:authors) }
     it { is_expected.to validate_presence_of(:title) }
