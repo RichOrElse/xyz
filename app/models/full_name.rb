@@ -17,5 +17,9 @@ class FullName < Struct.new(:first_name, :middle_name, :last_name)
     def of(other)
       new(other.first_name, other.middle_name, other.last_name)
     end
+
+    def to_proc
+      method(:call).to_proc
+    end
   end
 end

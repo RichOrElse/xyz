@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  subject { Book.new(publisher: publisher, authors: [author], isbn13: isbn13, title: title, publication_year: 2022, list_price: 3000) }
-  let(:author) { Author.new(first_name: "Rainer", middle_name: "Steel", last_name: "Rilke") }
-  let(:publisher) { Publisher.new(name: "McSweeney's") }
-  let(:isbn13) { "978-1-60309-398-9" }
-  let(:title) { "The Underwater Welder" }
+  include_context "with book params"
+  subject { Book.new(book_params) }
 
   context 'validations' do
     it { is_expected.to validate_presence_of(:authors) }
@@ -14,7 +11,6 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:publication_year) }
     it { is_expected.to validate_presence_of(:isbn13) }
     it { is_expected.to validate_length_of(:isbn13).is_at_most(17) }
-    it { is_expected.to validate_uniqueness_of(:isbn13).case_insensitive }
   end
 
   context 'database' do
