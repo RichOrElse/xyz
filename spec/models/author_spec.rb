@@ -8,6 +8,7 @@ RSpec.describe Author, type: :model do
   end
 
   context 'database' do
+    it { is_expected.to have_and_belong_to_many(:books).validate(false) }
     it { is_expected.to have_db_column(:first_name).with_options(null: false) }
     it { is_expected.to have_db_column(:last_name).with_options(null: false) }
     it { is_expected.to have_db_column(:middle_name) }
