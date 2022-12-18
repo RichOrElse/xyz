@@ -50,4 +50,19 @@ RSpec.describe ISBN, type: :model do
   describe "ten" do
     it { expect(ISBN.ten(isbn13)).to start_with(normalized_isbn13[3, 9]) }
   end
+
+  describe "convert" do
+    let(:isbn10) { "0-306-40615-2" }
+    let(:isbn13) { "978-0-306406-15-7" }
+
+    context "with ISBN-13" do
+      it { expect(ISBN.convert(isbn13)).to include(isbn10: isbn10, isbn13: isbn13) }
+    end
+
+    context "with ISBN-13 without 978" do
+      let(:isbn_param) { isbn13.sub("978", "879") }
+
+      it { expect(ISBN.convert(isbn_param)).to eq(isbn10: "", isbn13: isbn_param) }
+    end
+  end
 end
