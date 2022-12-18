@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action -> { render json: { error: "invalid ISBN-13" }, status: 400 if ISBN.invalid?(params[:isbn]) }
+
   # GET /books/:isbn
   def show
     if @book = BookRepository.at(params[:isbn])

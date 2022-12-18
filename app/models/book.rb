@@ -6,6 +6,7 @@ class Book < ApplicationRecord
 
   validates :isbn13, :title, :list_price, :publication_year, :authors, presence: true
   validates :isbn13, length: { maximum: 17 }
+  validates_with ISBN::Validator
 
   def to_param
     isbn13

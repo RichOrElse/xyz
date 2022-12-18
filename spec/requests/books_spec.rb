@@ -20,6 +20,13 @@ RSpec.describe "Books", type: :request do
         get book_path(other_book_params[:isbn13])
         expect(response).to have_http_status(404)
       end
-   end
+    end
+
+    context "with invalid isbn" do
+      it "returns http 400" do
+        get book_path(book.isbn13.reverse)
+        expect(response).to have_http_status(400)
+      end
+    end
   end
 end

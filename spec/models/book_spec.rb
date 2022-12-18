@@ -13,6 +13,8 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:publication_year) }
     it { is_expected.to validate_presence_of(:isbn13) }
     it { is_expected.to validate_length_of(:isbn13).is_at_most(17) }
+    it { is_expected.to allow_value(isbn13).for(:isbn13) }
+    it { is_expected.to_not allow_value(isbn13.next).for(:isbn13) }
   end
 
   context 'database' do
