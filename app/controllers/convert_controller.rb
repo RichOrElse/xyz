@@ -1,12 +1,10 @@
 class ConvertController < ApplicationController
   before_action { @convert = ISBN.convert(isbn_param) }
  
-  # GET /isbn
-  def index
-    render json: @convert
-  end
+  # GET /convert
+  alias_method :index,
 
-  # GET /isbn/:isbn
+  # GET /convert/:isbn
   def show
     render json: @convert
   end
