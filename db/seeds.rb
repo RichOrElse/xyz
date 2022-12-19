@@ -21,4 +21,4 @@ books = Book.create! [
     isbn13: "978-1-891830-02-0", isbn10: "1-891-83002-3", publication_year: 2000, publisher: greywolf_press, edition: "After School Special", list_price: 1200 },
   { title: "The Underwater Welder", authors: [rainer],
     isbn13: "978-1-60309-398-9", isbn10: "1-603-09398-2", publication_year: 2022, publisher: mcsweeneys, edition: nil, list_price: 3000 }  
-  ].map { |but| but.without(:isbn10, :edition) }
+  ].map { |but| but.without(:isbn10) }

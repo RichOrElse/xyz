@@ -1,4 +1,4 @@
-class BookPresenter < Struct.new(:isbn13, :title, :publisher_name, :authors, :publication_year, :list_price, :updated_at, :created_at, keyword_init: true)
+class BookPresenter < Struct.new(:isbn13, :title, :publisher_name, :authors, :publication_year, :edition, :image_url, :list_price, :updated_at, :created_at, keyword_init: true)
   def initialize(book)
     super book.slice(*members).merge(authors: AuthorsPresenter.new(book.authors).to_s)
   end

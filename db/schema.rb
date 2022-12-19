@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_16_132816) do
+ActiveRecord::Schema.define(version: 2022_12_19_104553) do
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name", null: false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2022_12_16_132816) do
     t.integer "publication_year", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "edition"
+    t.string "image_url"
     t.index "upper(replace(isbn13,'-',''))", name: "normalized_isbn13_uniq_idx", unique: true
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["title"], name: "index_books_on_title"
