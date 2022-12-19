@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_16_132816) do
+ActiveRecord::Schema.define(version: 2022_12_16_132816) do
+
   create_table "authors", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "middle_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["first_name"], name: "index_authors_on_first_name"
     t.index ["last_name"], name: "index_authors_on_last_name"
     t.index ["middle_name", "first_name", "last_name"], name: "index_authors_on_middle_name_and_first_name_and_last_name"
@@ -37,8 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_132816) do
     t.string "title", null: false
     t.decimal "list_price", precision: 10, scale: 2, null: false
     t.integer "publication_year", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index "upper(replace(isbn13,'-',''))", name: "normalized_isbn13_uniq_idx", unique: true
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["title"], name: "index_books_on_title"
@@ -47,8 +48,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_132816) do
 
   create_table "publishers", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index "lower(name)", name: "index_publishers_on_lower_name", unique: true
   end
 
