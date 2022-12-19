@@ -75,29 +75,25 @@ module ISBN
   end
 
   def checksum_thirteen(digits)
-    sum = digits.zip([1,3].cycle).map(&TO_PRODUCT).sum
-    10 - (sum % 10)
+    10 - digits.zip([1,3].cycle).map(&TO_PRODUCT).sum % 10
   end
 
   def checksum_ten(digits)
-    sum = digits.zip(10.downto(2)).map(&TO_PRODUCT).sum
-    11 - (sum % 11)
+    11 - digits.zip(10.downto(2)).map(&TO_PRODUCT).sum % 11
   end
 
   def thirteen(isbn)
-    return "" unless (isbn = normalize(isbn)).length.in?([10, 13])
+    return "" unless (isbn = normalize(isbn)).length.in?(10..13)
     return "" unless (isbn = adjust(isbn)).length == 12
 
-    check_digit = checksum_thirteen(digitize(isbn))
-    isbn << ZERO_IF_TEN[check_digit].to_s
+    isbn << checksum_thirteen(digitize(isbn)).then(&ZERO_IF_TEN).to_s
   end
 
   def ten(isbn)
     return "" if (isbn = normalize(isbn)).starts_with?("979")
     return "" if (isbn = trim(isbn)).empty?
 
-    check_digit = checksum_ten(digitize(isbn))
-    isbn << ZERO_IF_ELEVEN_OR_X_IF_TEN[check_digit].to_s
+    isbn << checksum_ten(digitize(isbn)).then(&ZERO_IF_ELEVEN_OR_X_IF_TEN).to_s
   end
 
   def normalize(isbn)
@@ -136,12 +132,6 @@ module ISBN
       if ISBN.invalid?(record.isbn13)
         record.errors.add :isbn13, :invalid
       end
-    end
-  end
-
-  class ThirteenTaken < ActiveRecord::RecordNotUnique
-    def ===(not_unique)
-      super && not_unique.message.ends_with?("UNIQUE constraint failed: index 'normalized_isbn13_uniq_idx'")
     end
   end
 end
