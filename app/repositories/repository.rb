@@ -25,8 +25,8 @@ class Repository
     at(param) || block&.call(param) || default
   end
 
-  def [](id)
-    fetch(id, build)
+  def [](param)
+    fetch(param) { build(@key => param) }
   end
 
   def <<(entry)

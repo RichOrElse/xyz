@@ -7,10 +7,6 @@ class PublisherRepository < Repository
     where table[:name].lower.eq(name.downcase)
   end
 
-  def [](name)
-    fetch(name, build(name: name))
-  end
-
   def <<(publisher)
     super
   rescue ActiveRecord::RecordNotUnique => not_unique
