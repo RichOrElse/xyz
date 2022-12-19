@@ -1,24 +1,42 @@
-# README
+# Exercise Ritchie Buitre
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails exercise for Montani.
+The XYZ bookstore listing books, authors and publishers.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+* Ruby 3.0.1
+* Rails 7.0.4
+* SQLite
 
-* System dependencies
+## Development Setup
 
-* Configuration
+On your commandline run the following:
 
-* Database creation
+Install Ruby gems:
 
-* Database initialization
+    $ bundle install
 
-* How to run the test suite
+Setup the database:
 
-* Services (job queues, cache servers, search engines, etc.)
+    $ rails db:setup
 
-* Deployment instructions
+Run the test:
 
-* ...
+    $ rspec --format doc
+
+## Demo
+
+Run the server:
+
+    $ rails server -p 3000
+
+Then open on your browser [http://localhost:3000](http://localhost:3000)
+
+To view a book type the ISBN-13 code under books endpoint: [GET http://localhost:3000/books/978-1-891830-85-3](http://localhost:3000/books/978-1-891830-85-3)
+
+To convert ISBN-13 to ISBN-10 and vice versa type the code under isbn endpoint: [GET http://localhost:3000/convert/978-1-891830-85-3](http://localhost:3000/convert/978-1-891830-85-3)
+
+## Author
+
+[@RichOrElse](github.com/richorelse) Ritchie Paul Buitre <ritchie@richorelse.com>
