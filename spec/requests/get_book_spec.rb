@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "Books", type: :request do
+RSpec.describe "Book request", type: :request do
   include_context "with book params"
   let!(:book) { Book.create(book_params) }
 
-  describe "GET /books/:isbn" do
+  describe "GET /book/:isbn" do
     it "returns http 200" do
       get book_path(book.isbn13) 
       expect(response).to have_http_status(200)

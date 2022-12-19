@@ -1,10 +1,10 @@
-class BooksController < ApplicationController
+class BookController < ApplicationController
   before_action -> { render json: { error: "invalid ISBN-13" }, status: 400 if ISBN.invalid?(params[:isbn]) }
 
-  # GET /books
+  # GET /book
   alias_method :index,
 
-  # GET /books/:isbn
+  # GET /book/:isbn
   def show
     if @book = BookRepository.at(params[:isbn])
       render json: @book.then(&BookPresenter)
