@@ -33,9 +33,9 @@ Run the server:
 
 Then open on your browser [http://localhost:3000](http://localhost:3000)
 
-To view a book type the ISBN-13 code under books endpoint:
+To view a book type the ISBN-13 code under book endpoint:
 
-    $ curl http://localhost:3000/books/978-1-891830-85-3
+    $ curl http://localhost:3000/book/978-1-891830-85-3
 
 To convert ISBN-13 to ISBN-10 and vice versa type the code under convert endpoint:
 
