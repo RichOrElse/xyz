@@ -50,6 +50,7 @@ group :development, :production do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "bundle-audit", "~> 0.1.0"
 end
 
 group :test do
