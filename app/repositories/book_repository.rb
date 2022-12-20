@@ -10,7 +10,7 @@ class BookRepository < Repository
   def <<(book)
     super
   rescue ActiveRecord::RecordNotUnique => not_unique
-    book.errors.add(:isbn13, :taken) if not_unique.message.end_with? "'normalized_isbn13_uniq_idx'"
+    book.errors.add(:isbn13, :taken) if not_unique.message.include? "normalized_isbn13_uniq_idx"
   ensure
     self
   end

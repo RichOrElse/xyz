@@ -10,7 +10,7 @@ class PublisherRepository < Repository
   def <<(publisher)
     super
   rescue ActiveRecord::RecordNotUnique => not_unique
-    publisher.errors.add(:name, :taken) if not_unique.message.end_with? "'index_publishers_on_lower_name'"
+    publisher.errors.add(:name, :taken) if not_unique.message.include? "index_publishers_on_lower_name"
   ensure
     self
   end
