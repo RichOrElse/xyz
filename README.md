@@ -5,7 +5,7 @@ The XYZ bookstore listing books, authors and publishers.
 
 ## Prerequisites
 
-* Ruby 3.0.1
+* Ruby 3.1.0
 * Rails 6.1.7
 * SQLite
 
