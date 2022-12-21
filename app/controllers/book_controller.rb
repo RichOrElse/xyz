@@ -6,10 +6,15 @@ class BookController < ApplicationController
 
   # GET /book/:isbn
   def show
-    if @book = BookRepository.at(params[:isbn])
+    if @book = books.at(params[:isbn])
       render json: @book.then(&BookPresenter)
     else
       render json: { error: "not found" }, status: 404
     end
   end
+
+  private
+    def books
+      BookRepository.new(Book.includes(:publisher, :authors))
+    end
 end
