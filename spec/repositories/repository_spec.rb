@@ -30,23 +30,10 @@ RSpec.describe Repository, type: :repository do
     it { expect(repository.fetch(last_publisher.id.next, :fallback)).to eq :fallback }
   end
 
-  describe "[]" do
-    it { expect(repository[publisher.id]).to eq(publisher) }
-    it { expect(repository[last_publisher.id.next]).to be_a(Publisher) }
-  end
-
   describe "<<" do
     it { expect(repository << last_publisher).to eq(repository) }
     it { expect { repository << Publisher.new(attributes) }.to change(Publisher, :count) }
     it { expect { repository << Publisher.new(name: "") }.to_not change(Publisher, :count) }
     it { expect { repository << publisher.tap { publisher.attributes = attributes } }.to change { publisher.reload.name } }
-  end
-
-  describe "store" do
-    it { expect { repository.store(nil, attributes) }.to change(Publisher, :count) }
-    it { expect { repository.store(nil, name: "") }.to_not change(Publisher, :count) }
-    it { expect { repository.store(publisher.id, attributes) }.to change { publisher.reload.name } }
-    it { expect { repository.store(publisher.id, name: "") }.to_not change { publisher.reload.name } }
-    it { expect(repository.store(publisher.id, name: "")).to be_invalid }
   end
 end

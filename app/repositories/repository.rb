@@ -25,8 +25,29 @@ class Repository
     at(param) || block&.call(param) || default
   end
 
-  def [](param)
-    fetch(param) { build(@key => param) }
+  def fetch_or_build_with(param)
+    fetch(param) { build_with(param) }
+  end
+
+  def fetch_or_add_with(param)
+    fetch(param) { add_with(param) }
+  end
+
+  def build_with(param)
+    build(@key => param)
+  end
+
+  def add_with(param)
+    add build_with(param)
+  end
+
+  def add(entry)
+    self << entry
+    entry
+  end
+
+  def renove(entry)
+    entry.destroy
   end
 
   def <<(entry)
