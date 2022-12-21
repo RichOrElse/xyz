@@ -7,7 +7,7 @@ paste_magazine, publishers_weekly, greywolf_press, mcsweeneys =
 
 joel, hannah, marguerite, kingsley, fannie, camille, rainer =
     ["Joel Hartse", "Hannah P. Templer", "Marguerite Z. Duras", "Kingsley Amis", "Fannie Peters Flagg", "Camille Byron Paglia", "Rainer Steel Rilke"]
-        .map { |name| Author.with_full_name(name).first_or_create! }
+        .map { |full_name| AuthorRepository.fetch_or_add_with(full_name) }
 
 books = Book.create! [
   { title: "American Elf", authors: [joel, hannah, marguerite],

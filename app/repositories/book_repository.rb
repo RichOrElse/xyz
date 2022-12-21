@@ -11,13 +11,5 @@ class BookRepository < Repository
     super
   rescue ActiveRecord::RecordNotUnique => not_unique
     book.errors.add(:isbn13, :taken) if not_unique.message.include? "normalized_isbn13_uniq_idx"
-  ensure
-    self
-  end
-
-  module ISBN
-    def self.normalize(isbn)
-      isbn.to_s.delete('-').upcase
-    end
   end
 end

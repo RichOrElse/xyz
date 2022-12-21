@@ -1,4 +1,10 @@
 class FullName < Struct.new(:first_name, :middle_name, :last_name)
+  def initialize(first_name, middle_name, last_name)
+    super first_name.titlecase,
+          middle_name.titlecase,
+          last_name.titlecase
+  end
+
   def to_s
     reject(&:blank?).join(" ")
   end

@@ -11,7 +11,5 @@ class PublisherRepository < Repository
     super
   rescue ActiveRecord::RecordNotUnique => not_unique
     publisher.errors.add(:name, :taken) if not_unique.message.include? "index_publishers_on_lower_name"
-  ensure
-    self
   end
 end
