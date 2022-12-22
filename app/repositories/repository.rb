@@ -46,12 +46,12 @@ class Repository
     entry
   end
 
-  def renove(entry)
+  def remove(entry)
     entry.destroy
   end
 
   def <<(entry)
-    entry.save if entry.valid?
+    entry.save(validate: false) if entry.valid?
     self
   end
 
